@@ -1,0 +1,34 @@
+{% extends 'reviews/base.html' %}
+
+{% block title %}Your Review{% endblock  %}
+
+{% block content %}
+    {% comment %} 
+    "for" attribute of the label should match the "id" attribute of the input, to establish a connection between the 2.
+    "name" attribute will be used to get hold of the user input at the backend server.
+    {% endcomment %}
+
+    {% comment %} 
+    <form action="/" method="POST">
+        {% csrf_token %}
+        {% if has_error %}
+            <p>This form is invalid - please enter a valid username!</p>
+        {% endif %}
+        <label for="username">Your name</label>
+        <input id="username" name="username" type="text">
+        <button type="submit">Send</button>
+    </form>
+    {% endcomment %}
+
+    <form action="/" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-control {% if field.errors %}errors{% endif %}">
+                {{ field.label_tag }}
+                {{ field }}
+                {{ field.errors }}
+            </div>
+        {% endfor %}
+        <button type="submit">Send</button>
+    </form>
+{% endblock  %}
